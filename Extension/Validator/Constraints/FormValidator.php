@@ -91,6 +91,7 @@ class FormValidator extends ConstraintValidator
                             // in different steps without breaking early enough
                             $this->resolvedGroups[$field] = (array) $group;
                             $fieldFormConstraint = new Form();
+                            $this->context->setNode($this->context->getValue(), $field, $this->context->getMetadata(), $this->context->getPropertyPath());
                             $validator->atPath(sprintf($fieldPropertyPath, $field->getPropertyPath()))->validate($field, $fieldFormConstraint);
                         }
                     }
@@ -138,6 +139,7 @@ class FormValidator extends ConstraintValidator
                     if ($field->isSubmitted()) {
                         $this->resolvedGroups[$field] = $groups;
                         $fieldFormConstraint = new Form();
+                        $this->context->setNode($this->context->getValue(), $field, $this->context->getMetadata(), $this->context->getPropertyPath());
                         $validator->atPath(sprintf($fieldPropertyPath, $field->getPropertyPath()))->validate($field, $fieldFormConstraint);
                     }
                 }
